@@ -1,0 +1,834 @@
+
+#page {
+    
+
+  
+}
+#mainContent.non-home-page-wrapper{
+    
+    background-color: #ffffff;
+    
+}
+
+#home-page-featured-listings-wrapper{
+    
+   background-color: #e5e5e5; 
+    
+ /*
+
+background-image: -ms-linear-gradient(top, #0C4067 0%, #1974A9 100%);
+
+
+background-image: -moz-linear-gradient(top, #0C4067 0%, #1974A9 100%);
+
+
+background-image: -o-linear-gradient(top, #0C4067 0%, #1974A9 100%);
+
+
+background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #0C4067), color-stop(1, #1974A9));
+
+
+background-image: -webkit-linear-gradient(top, #0C4067 0%, #1974A9 100%);
+
+
+background-image: linear-gradient(to bottom, #0C4067 0%, #1974A9 100%);
+  */  
+    
+}
+
+/*sarch form background*/
+#search-home-container{
+    
+   
+    background-repeat: repeat-x;
+ 
+	min-height:126px;
+	background-color:#fff;
+	float:left;
+	padding-bottom:4px;
+	padding-left:4px;
+    
+}
+
+
+
+#page-widget .cta-slider-item{
+	height:72px;	
+}
+
+#page-widget .cta-slider-item{
+ width:188px!important;   
+ background-color: rgba(255,255,255,0.85);
+}
+
+#page-widget .cta-slider a{
+    
+    color:#2b2b2b;
+	text-decoration:none;
+	display:block;
+    
+}
+
+#page-widget .cta-slider-item p{
+    color:#2b2b2b;
+}
+
+#page-widget .cta-slider-item{
+margin-bottom:4px;	
+background-image: url(search.png); 
+background-position: 25px 27px;
+padding-left:80px;
+padding-top:20px;
+background-repeat: no-repeat;
+}
+
+
+#page-widget .cta_arrow,
+#page-widget .cta_buildings,
+#page-widget .cta_calc,
+#page-widget .cta_calendar,
+#page-widget .cta_chart,
+#page-widget .cta_chat,
+#page-widget .cta_house,
+#page-widget .cta_mail,
+#page-widget .cta_mobile,
+#page-widget .cta_pencil,
+#page-widget .cta_search,
+#page-widget .cta_stats,
+#page-widget .cta_tag,
+#page-widget .cta_value
+{
+   background-image: url(search.png); 
+   background-position: 25px 27px;
+   padding-left:80px;
+   padding-top:20px;
+   background-repeat: no-repeat;
+		
+}
+
+#page-widget h3.section{
+
+	display:none;
+	
+}
+
+
+#page-widget .cta_search
+{
+   background-image: url(search.png); 
+   background-position: 25px 27px;
+   padding-left:80px;
+   padding-top:20px;
+   background-repeat: no-repeat;
+}
+#page-widget .cta_chart{
+  background-image: url(watch.png); 
+  background-position: 25px 27px;
+   padding-left:80px;
+   padding-top:20px;
+   background-repeat: no-repeat;
+}
+#page-widget .cta_value{
+    
+    background-image: url(worth.png);   
+    background-position: 25px 27px;
+    padding-left:80px;
+    padding-top:20px;
+    background-repeat: no-repeat;
+  
+}
+
+
+
+
+
+
+.cta-item h3{
+color:#5F35C9;	
+}
+
+
+/*search form */
+#propertySearchLabel{
+
+    background-image: url(img/searchBack.png);
+    background-repeat: no-repeat;
+    width:202px;
+    height:125px;
+    float:left;
+    text-indent: -1000px;
+}
+
+#idx-search-wrapper li{
+    
+    float:left;
+    
+}
+#idx-search-wrapper .emptySpaceSearch{
+    
+    width:40px;
+    height:20px;
+    border:2px solid green;
+    
+}
+#idx-search-wrapper label{
+    display: block;
+}
+#idx-search-wrapper .zipWrapper {
+    
+    width:154px!important;
+    /*border:1px solid red;*/
+    height:40px;
+    margin-right:12px;
+}
+
+
+#search-home-container label{
+    font-style: italic;
+    color: #9f9f9f;
+    font-size: 11px;
+}
+
+
+#idx-q-Cities{
+    
+    
+    width:150px;
+    background-color:#C0C0C0;
+    height:32px;
+    
+    
+    
+}
+/*cambiar*/
+#social-contact.color
+{
+
+    background-color: #e5e5e5;
+	
+	box-shadow:0px 2px 5px rgba(0, 0, 0, 0.26);
+	-webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.26);
+	-moz-box-shadow:    0px 2px 5px rgba(0, 0, 0, 0.26);
+	margin-bottom:0px;
+	position:relative;
+	z-index:100;
+    /*order-bottom:2px solid #040404;*/
+}
+
+#social-media .fb{
+    background-image:url(social-contact/fb.png);
+} 
+
+#social-media .tw{
+    background-image:url(social-contact/tw.png);
+} 
+#social-media .li{
+    background-image:url(social-contact/li.png);
+} 
+#social-media .yt{
+    background-image:url(social-contact/yt.png);
+} 
+#social-media .gp{
+    background-image:url(social-contact/gp.png);
+} 
+
+#contact ul li a.email {
+   background-image:url(social-contact/mail.png);
+   width:80px;
+   text-align: left;
+   padding-left:40px;
+}
+#contact ul li a.email {
+   background-image:url(social-contact/mail.png);
+   width:80px;
+   text-align: left;
+   padding-left:40px;
+}
+
+#social-media-ul #email-link {
+	 background-image:url(social-contact/mail2.png);
+	 padding-left:0px;
+	 background-repeat:no-repeat;
+	 padding:0;
+	 background-position:center bottom;
+	 width:36px;
+	 height:30px;
+	 
+}
+
+
+#contact ul li a.telephone {
+   background-image:url(social-contact/tel.png);
+   background-position: 10px 8px;
+   text-align: left;
+   padding-left:36px;
+   margin-left:4px;
+}
+
+.home-page #idx-q-BathsMin{
+    background-color: #C0C0C0;
+    padding:4px 4px;
+    width:55px;
+    margin-right:10px;
+	color:#fff;
+}
+
+.home-page #idx-q-PriceMax{
+    
+    background-color: #C0C0C0;
+    height: 30px;
+    width:64px;
+    color:#fff;
+}
+
+.home-page #search-button{
+    
+    background-color:#000!important;
+    color:#fff;
+    text-transform: uppercase;
+    margin-left:18px;
+    margin-top:10px;
+    padding:5px  8px  4px 8px;
+    height:30px;
+}
+
+.home-page #idx-q-BedsMin{
+    
+    background-color: #C0C0C0;
+    padding:4px 4px;
+    width:55px;
+    margin-right:10px;
+	color:#fff;
+}
+
+.home-page #idx-q-PriceMin{
+    
+    background-color: #C0C0C0;
+    height: 30px;
+    width:64px;
+	color:#fff;
+}
+.home-page #location-search{
+    
+     background-color: #C0C0C0;
+    height: 30px;
+    width:200px;
+	
+	color:#fff;
+}
+.home-page #submitIdxSearch:hover{
+    
+    background-color: #000;
+    color:white;
+    border:1px solid black!important;
+    padding:4px;
+    text-transform: uppercase;
+}
+
+.home-page  #submitIdxSearch{
+    
+    background-color: #000;
+    color:white;
+    border:1px solid black;
+    padding:4px;
+    text-transform: uppercase;
+    
+}
+ul.sub-menu{
+    
+   
+}
+
+
+ul.sub-menu 
+{
+  position: relative;
+  width: 60%;
+  background: #ddd;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  padding: 2em 1.5em;
+  color: rgba(0,0,0, .8);
+  text-shadow: 0 1px 0 #fff;
+  line-height: 1.5;
+
+}	
+
+
+ul.sub-menu:before, ul.sub-menu:after 
+{
+  z-index: -1; 
+  position: absolute; 
+  content: "";
+  bottom: 15px;
+  left: 10px;
+  width: 50%; 
+  top: 80%;
+  max-width:300px;
+  background: rgba(0, 0, 0, 0.7); 
+  -webkit-box-shadow: 0 15px 10px rgba(0,0,0, 0.7);   
+  -moz-box-shadow: 0 15px 10px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 15px 10px rgba(0, 0, 0, 0.7);
+  -webkit-transform: rotate(-3deg);    
+  -moz-transform: rotate(-3deg);   
+  -o-transform: rotate(-3deg);
+  -ms-transform: rotate(-3deg);
+  transform: rotate(-3deg);
+}
+
+ul.sub-menu:after 
+{
+  -webkit-transform: rotate(3deg);
+  -moz-transform: rotate(3deg);
+  -o-transform: rotate(3deg);
+  -ms-transform: rotate(3deg);
+  transform: rotate(3deg);
+  right: 10px;
+  left: auto;
+}	
+
+
+
+
+#site-navigation{
+    
+    background-color:#fff;
+    margin-bottom: 10px;
+    
+}
+
+.current_page_parent{
+    
+    
+    
+}
+
+
+.listing-small-address{
+    
+    color:#6035CB;
+}
+
+.secondary-main-listing {
+    
+    background-color: transparent;
+    margin-top:40px;
+    
+}
+
+
+.bbutton .text {
+   color:#817C7C;
+}  
+
+
+#home-page-latest-posts {
+    
+    border-top:1px solid #CCC;
+}
+
+#home-page-communities-wrapper{
+    border-top:1px solid #ccc;
+}
+
+/*home posts */
+
+home-page .excerpt h2 a{
+    
+    color:
+    
+}
+
+
+#footer{
+    border-top:1px solid #d1d1d1;
+    color:#AFAFAF;
+    padding-top:25px;
+    padding-bottom: 20px;
+}
+
+.email {
+color:#8457F4;
+font-style: italic;
+}
+
+
+
+.single-community-inner .community-body a{
+    color:#6035CB;
+}
+
+#dsidx-primary-data{
+    font-size: 90%;
+}
+
+
+.more-info-image{
+    background-image:url(img/listing-get-more.png);
+    display: inline-block;
+    height:31px;
+    width:206px!important;
+    background-position: center center;
+}
+
+.detailed-report-image{
+     background-image:url(img/listing-report.png);
+    background-position: center center;
+     display: inline-block;
+     height:31px;
+     width:206px!important;
+}
+.schedule-info-image{
+     background-image:url(img/listing-schedule.png);
+     height:31px;
+     width:206px!important;
+     background-position: center center;
+     display: inline-block;
+}
+
+/*individual custom listing */
+
+.listing-tour-image
+{
+    background-image: url(img/listing/virtual.png);
+}
+
+.listing-get-more-image{
+    background-image: url(img/listing/get.png);
+}
+
+.listing-schedule-image{
+    background-image: url(img/listing/schedule.png);
+}
+
+.listing-report-image{
+    background-image: url(img/listing/report.png);
+}
+
+.listing-details-sf{
+    
+    background-image: url(img/house.png);
+    background-repeat: no-repeat;
+    background-position: left center;
+    margin-left:20px;
+}
+.listing-details-garage{
+    background-image: url(img/garage.png);
+    background-repeat: no-repeat;
+    background-position: left center;
+    margin-left:20px;
+}
+.listing-details-baths{
+    background-image: url(img/baths.png);
+    background-repeat: no-repeat;
+    background-position: left center;
+    margin-left:20px;
+}
+.listing-details-beds{
+    background-image: url(img/beds.png);
+    background-repeat: no-repeat;
+    background-position: left center;
+    margin-left:20px;
+}
+
+/*change*/
+.cta-item{
+    
+ background-color: rgba(255,255,255,0.5);
+}
+
+/*change*/
+.cta h3 a{
+    
+   /* color:#fff;*/
+    
+}
+
+/*change*/
+.cta .cta-item p{
+    /*color:white;*/
+}
+
+/*change*/
+.telephone{
+    /*color:white;*/
+}
+/*change*/
+.email{
+    
+    /*color:#329FE0;*/
+    
+}
+/*change*/ /*shadow for background image */
+#rotator-out-wrapper{
+    
+    background-color:#E5E5E5;
+        
+    
+}
+/*change for communities las item*/
+#see-more-communities{
+    
+    /*background-image:url(img/see-more-communities.jpg);*/
+    background-color: #e5e5e5;
+    background-repeat: repeat-x;
+    border-radius: 5px;
+}
+#see-more-communities span{
+   /* color:#fff;*/
+}
+#see-more-communities a{
+   /* color:#fff;*/
+}
+
+#home-page-featured-listings-wrapper{
+    
+    
+   /* color:#fff!important;*/
+}
+/*change*/
+#home-page-featured-listings-wrapper a{
+   /* color:#6842CB!important;*/
+    /**/
+    color:#8D72D3!important;
+    
+}
+
+#main-listing-description{
+    
+    color:#686868!important;
+}
+
+#primary-listing #view-more-main-listing{
+    color:white!important;
+}
+
+#bottom-buttons li#bb-first a{
+    
+    background-image:url(door.png);
+    background-repeat: no-repeat;
+    background-position: 14px 6px; 
+}
+
+#bottom-buttons li#bb-second a{
+    background-image:url(sale.png);
+    background-repeat: no-repeat;
+    background-position: 14px 6px; 
+}
+#bottom-buttons li#bb-third a{
+    background-image:url(s.png);
+    background-repeat: no-repeat;
+    background-position: 0px 6px; 
+}
+/*  view more listings*/
+#featured-listing-widget-outter-wrapper .more a{
+
+    color:#8D72D3!important;
+}
+
+#featured-category-wrapper h3{
+    
+    color:#696969;
+}
+
+#home-page-communities-inner h3{
+    color:#696969;
+}
+/*change ltop line for featured listings*/
+.listing-features-wrapper{
+    border-top:1px solid #fff!important;
+}
+/*change ltop line for featured listings*/
+#primary-listing {
+    border-top:1px solid #fff!important;
+    margin-top:10px;
+}
+
+.more-info-image{
+  background-image:url(img/idx/get.png); 
+   
+}
+
+.detailed-report-image{
+   background-image:url(img/idx/report.png); 
+   
+}
+.schedule-info-image{
+    background-image:url(img/idx/schedule.png);  
+    
+}
+
+
+/*changes 19 march 2013 */
+
+.cta h3 a {
+    color:#181818;
+}
+/*changes march 20 2013*/
+
+
+.flex-control-paging li a 
+{width: 8px;
+ height: 8px;
+ display: block; 
+ background: transparent;
+
+ cursor: pointer;
+ text-indent: 9999px;
+
+ background-image: url(img/Ball.png)!important;
+ background-repeat: no-repeat;
+}
+.flex-control-paging li a:hover { 
+    background: #333; 
+ 
+}
+.flex-control-paging li a.flex-active 
+{ 
+ 
+  cursor: default;
+  background-image: url(img/selectedBall.png)!important;
+  background-repeat: no-repeat;
+  
+}
+
+
+
+
+
+.flex-direction-nav {*height: 0;}
+.flex-direction-nav a {width: 38px; height: 38px; margin: -20px 0 0; display: block;
+ no-repeat 0 0; 
+ position: absolute; top: 50%; 
+ z-index: 10; cursor: pointer;
+  text-indent: -9999px; opacity:0.5; -webkit-transition: all .3s ease;
+ z-index:100; 
+ background-repeat:no-repeat;
+ }
+
+.flex-next{
+ background: url(img/nav-right.png)
+
+}
+.flex-prev{
+ background: url(img/nav-left.png)
+ 
+}
+
+
+.flex-direction-nav .flex-next {background-position: 100% 0; right: -46px; }
+.flex-direction-nav .flex-prev {left: -46px;}
+.flexslider:hover .flex-next {opacity: 1; }
+.flexslider:hover .flex-prev {opacity: 1; }
+.flexslider:hover .flex-next:hover, .flexslider:hover .flex-prev:hover {opacity: 1;}
+.flex-direction-nav .flex-disabled {opacity: .3!important; filter:alpha(opacity=30); cursor: default;}
+
+@media screen and (max-width: 860px) {
+  .flex-direction-nav .flex-prev {opacity: 1; left: 0;border:1px solid transparent;}
+  .flex-direction-nav .flex-next {opacity: 1; right: 0;border:1px solid transparent;}
+}
+
+
+.footer {
+	color:#666;
+}
+
+.footer a {
+color:#666!important;
+font-weight:bold;
+}
+
+
+#propertySearchLabel .search-title{
+text-indent:0px!important;	
+display:block!important;
+color:#1B1B1B;
+font-size:2.0em;
+text-align:center;
+margin-top:16px;
+}
+#propertySearchLabel .search-subtitle{
+text-indent:0px!important;	
+display:block!important;
+color:#8F6AEE!important;
+font-size:1.0em;
+text-align:center;
+line-height:20px;
+margin-bottom:30px;
+font-style:italic;
+text-transform:capitalize;
+}
+
+
+#bottom-buttons{
+max-width:960px; 
+margin:0 auto;
+}
+
+#bottom-buttons #bb-first a{
+    
+    background-image:url(door.png);
+    background-repeat: no-repeat;
+    background-position: 14px 6px; 
+}
+
+#bottom-buttons #bb-second a{
+    background-image:url(sale.png);
+    background-repeat: no-repeat;
+    background-position: 14px 6px; 
+}
+#bottom-buttons #bb-third a{
+    background-image:url(s.png);
+    background-repeat: no-repeat;
+    background-position: 0px 6px; 
+}
+
+#featured-listing-widget-outter-wrapper{
+background-color:#e5e5e5;	
+}
+
+#featured-listing-widget-outter-wrapper
+{
+color:black;	
+}
+#featured-listing-widget-outter-wrapper a
+{
+	color:#5F35C9!important;
+}
+
+a#view-more-link{
+color:white!important;	
+}
+
+#phone-big {
+	
+background-image: url(social-contact/tel.png);
+background-repeat: no-repeat;
+font-size: 20px;
+text-align: right;
+background-position: 10px 5px;
+text-wrap: none;
+margin: 0 auto;
+width: 140px;
+height: 26px;
+line-height: 26px;
+padding-right:4px;
+}
+
+
+#email-icon-only{
+background-image:url(social-contact/mail2.png);
+display: block;
+width: 36px;
+height: 30px;
+text-indent: -1000px;
+background-repeat: no-repeat;
+background-position: center bottom;
+padding-top:2px;
+}
+
+/*printer and share*/
+
+.dsidx-actions-button{
+color:#666!important;	
+}

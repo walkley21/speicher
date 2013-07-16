@@ -1,0 +1,28 @@
+
+
+#page.gray .cta-item {
+    
+    background-color: #fff;
+    
+}
+
+#page.gray #page-widget-search{
+    
+    background-color: #fff;
+}
+
+#page.red .cta-item {
+    
+    background-color: #6a0000;
+    
+}
+
+#page.blue .cta-item {
+    
+    background-color: #186DA3;
+    
+}
+
+#page.blue #home-page-featured-listings-wrapper{
+    background-color: #0E4065;
+}

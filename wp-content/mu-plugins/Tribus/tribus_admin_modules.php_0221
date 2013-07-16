@@ -1,0 +1,319 @@
+<?php
+/*
+Plugin Name: Tribus Custom Admin Modules Class
+Plugin URI: http://www.tribus.com/
+Description: Class to control which blog gets assigned which modules.
+Version: 1.0
+Author: Jason Benesch
+Author URI: http://www.jasonbenesch.com/
+*/
+
+require_once("tribus_core.php");
+
+class TribusModules extends TribusCore {
+	
+	var $translate = array(
+		'tribus_custom_post_type'		=> 'Custom Post Type',
+		'tribus_power_conversion'		=> 'Power Conversion',
+		'tribus_seo'					=> 'SEO Package',	
+		'tribus_idx'					=> 'Advance IDX',
+		'tribus_market_stats'			=> 'Altos Market Stats',
+		'tribus_instant_communication'	=> 'Instant Communication'
+	);
+	
+	function __construct() {
+		add_action('network_admin_menu', array(&$this, 'add_modules_view'));
+		add_action( 'wp_ajax_TribusAdminModulesCheck', array(&$this, 'check_module'));
+		add_action( 'wp_ajax_TribusAdminModulesInput', array(&$this, 'input_module'));
+		wp_enqueue_script('jquery'); 
+	}
+	
+	function input_module() {
+		global $wpdb;
+		check_ajax_referer('TribusAdminModules');
+		
+		$blog_id = ( isset($_POST['blog_id']) ) ? $_POST['blog_id'] : false;
+		$tribus_id = ( isset($_POST['tribus_id']) ) ? $_POST['tribus_id'] : '';
+		
+		if ( $blog_id ) {
+			
+			$table = ( $blog_id > 1 ) ? "wp_{$blog_id}_options" : "wp_options";
+			$data = array( 'option_value' => $tribus_id );
+			$where = array( 'option_name' => "tribus_id" );
+			$name = $wpdb->get_var("SELECT option_value FROM {$table} WHERE option_name='blogname'");
+			
+			if ( $wpdb->update($table, $data, $where) ) {
+				echo json_encode( array('errorCode' => 0, 'message' => "The Tribus CRM ID was saved for {$name}.") );
+			} else {
+				$data['option_name'] = "tribus_id";
+				if ( $wpdb->insert($table, $data) ) {
+					echo json_encode( array('errorCode' => 0, 'message' => "The Tribus CRM ID was saved for {$name}.") );
+				} else {
+					echo json_encode( array('errorCode' => 2, 'message' => "Could not update the database. Table: {$table} - Tribus ID: {$tribus_id}.") );
+				}
+			}
+		} else {
+			echo json_encode( array('errorCode' => 1, 'message' => "Could not update the database. Blog: {$blog_id}, Tribus: {$tribus_id}") );
+		}
+		exit;
+	}
+	
+	function check_module() {
+		global $wpdb;
+		check_ajax_referer('TribusAdminModules');
+		
+		$property = ( isset($_POST['property']) ) ? $_POST['property'] : false;
+		$blog_id = ( isset($_POST['blog_id']) ) ? $_POST['blog_id'] : false;
+		$activate = ( isset($_POST['activate']) && $_POST['activate'] == 'Y' ) ? 'Y' : 'N';
+		
+		if ( $property && $blog_id ) {
+			$table = ( $blog_id > 1 ) ? "wp_{$blog_id}_options" : "wp_options";
+			$data = array( 'option_value' => $activate );
+			$where = array( 'option_name' => $property );
+			$name = $wpdb->get_var("SELECT option_value FROM {$table} WHERE option_name='blogname'");
+			
+			if ( $wpdb->update($table, $data, $where) ) {
+				$install = ( $activate == 'Y' ) ? 'activated' : 'deactivated';
+				echo json_encode( array('errorCode' => 0, 'message' => "The {$this->translate[$property]} Module is now {$install} on {$name}") );
+			} else {
+				$data['option_name'] = $property;
+				if ( $wpdb->insert($table, $data) ) {
+					$install = ( $activate == 'Y' ) ? 'activated' : 'deactivated';
+					echo json_encode( array('errorCode' => 0, 'message' => "The {$this->translate[$property]} Module is now {$install} on {$name}") );
+				} else {
+					echo json_encode( array('errorCode' => 2, 'message' => "Could not update the database. Table: {$table} - Checked: {$activate} - Property: {$property}") );
+				}
+			}
+		} else {
+			echo json_encode( array('errorCode' => 1, 'message' => 'One of these were not set. Blog: ' . $blog_id . ', Property: ' . $property) );
+		}
+		exit;
+	}
+	
+	function add_modules_view() {
+		add_submenu_page('sites.php', 'Tribus Custom Modules', 'Enable Modules', 'manage_network_options', 'tribus-modules', array(&$this, 'modules_view'));    
+	}
+
+	// stripped down version of get_blog_option() 
+	function getSiteOption($sPrefix, $sSetting)
+	{
+		$sql = "SELECT `option_value` " .
+				" FROM `{$sPrefix}options` " .
+				" WHERE option_name=%s";
+		global $wpdb;
+		$row = $wpdb->get_row($wpdb->prepare($sql, $sSetting));
+		if (is_object($row))
+		{
+			$value = $row->option_value;
+		} else {
+			$value = FALSE;
+		}
+		return ($value);
+	}
+
+	function modules_view() {
+		global $wpdb;
+		$sites = $wpdb->get_results( "SELECT * FROM {$wpdb->blogs} WHERE site_id = '1'", ARRAY_A );
+		$nonce = wp_create_nonce('TribusAdminModules');
+		$ajaxUrl = admin_url('admin-ajax.php');
+?>
+		<div class="wrap">
+			<?php screen_icon('ms-admin'); ?>
+			<h2>
+				<?php _e('Enable Site Modules') ?>
+				<?php if ( current_user_can( 'create_sites') ) : ?>
+		        	<a href="<?php echo network_admin_url('site-new.php'); ?>" class="add-new-h2"><?php echo esc_html_x( 'Add A New Site &raquo;', 'site' ); ?></a>
+				<?php endif; ?>
+			</h2>
+			<div id="message" class="warning" style="display:none;"></div>
+			<input type="hidden" id="TribusAdminModules" value="<?php echo $nonce; ?>" />
+			<table class="wp-list-table widefat fixed sites" cellspacing="0">
+				<thead>
+					<tr>
+						<th scope="col" class="manage-column"><span>Site</span></th>
+						<th scope="col" class="manage-column"><span>Tribus CRM ID</span></th>
+						<th scope="col" class="manage-column center"><span>Custom Post Type</span></th>
+						<th scope="col" class="manage-column center"><span>Power Conversion</span></th>
+						<th scope="col" class="manage-column center"><span>SEO Package</span></th>
+						<th scope="col" class="manage-column center"><span>Advance IDX</span></th>
+						<th scope="col" class="manage-column center"><span>Altos Market Stats Package</span></th>
+						<th scope="col" class="manage-column center"><span>Instant Communication</span></th>
+					</tr>
+				</thead>
+				<tbody>
+<?php
+				global $wpdb; // need for the blog prefix below
+				foreach ( $sites as $site ) {
+//					$url = get_blog_option($site['blog_id'], 'siteurl');
+//					$tribus_id = get_blog_option($site['blog_id'], 'tribus_id');
+//					$sub = explode(".", $site['domain']);
+
+					$sPrefix = $wpdb->get_blog_prefix($site['blog_id']);
+					$url = $this->getSiteOption($sPrefix, 'siteurl');
+					$tribus_id = $this->getSiteOption($sPrefix, 'tribus_id');
+					$sub = explode('.', $site['domain']);
+?>
+					<tr class="alternate">
+						<td class="column-blogname blogname">
+							<a href="<?php echo $url; ?>/wp-admin/network/site-info.php?id=<?php echo $site['blog_id']; ?>" class="edit cut-title"><?php echo $sub[0]; ?></a>
+							<div class="row-actions">
+								<span class="edit">
+									<span class="edit">
+										<a href="<?php echo $url; ?>/wp-admin/network/site-info.php?id=<?php echo $site['blog_id']; ?>">Edit</a>
+									</span> | 
+								</span>
+								<span class="backend">
+									<span class="backend">
+										<a href="<?php echo $url; ?>/wp-admin/" class="edit">Dashboard</a>
+									</span> | 
+								</span>
+								<span class="visit">
+									<span class="view">
+										<a href="<?php echo $url; ?>" rel="permalink">Visit</a>
+									</span>
+								</span>
+							</div>						
+						</td>
+						<th scope="row" class="text-column">
+							<input type="text" id="tribus_id-<?php echo $site['blog_id']; ?>" name="tribus_id" value="<?php echo $tribus_id; ?>">
+						</th>
+						<th scope="row" class="check-column">
+							<input type="checkbox" id="tribus_custom_post_type-<?php echo $site['blog_id']; ?>" name="tribus_custom_post_type" value="Y" <?php echo ( get_blog_option($site['blog_id'], 'tribus_custom_post_type') == 'Y' ) ? "CHECKED" : ""; ?>>
+						</th>
+						<th scope="row" class="check-column">
+							<input type="checkbox" id="tribus_power_conversion-<?php echo $site['blog_id']; ?>" name="tribus_power_conversion" value="Y" <?php echo ( get_blog_option($site['blog_id'], 'tribus_power_conversion') == 'Y' ) ? "CHECKED" : ""; ?>>
+						</th>
+						<th scope="row" class="check-column">
+							<input type="checkbox" id="tribus_seo-<?php echo $site['blog_id']; ?>" name="tribus_seo" value="Y" <?php echo ( get_blog_option($site['blog_id'], 'tribus_seo') == 'Y' ) ? "CHECKED" : ""; ?>>
+						</th>
+						<th scope="row" class="check-column">
+							<input type="checkbox" id="tribus_idx-<?php echo $site['blog_id']; ?>" name="tribus_idx" value="Y" <?php echo ( get_blog_option($site['blog_id'], 'tribus_idx') == 'Y' ) ? "CHECKED" : ""; ?>>
+						</th>
+						<th scope="row" class="check-column">
+							<input type="checkbox" id="tribus_market_stats-<?php echo $site['blog_id']; ?>" name="tribus_market_stats" value="Y" <?php echo ( get_blog_option($site['blog_id'], 'tribus_market_stats') == 'Y' ) ? "CHECKED" : ""; ?>>
+						</th>
+						<th scope="row" class="check-column">
+							<input type="checkbox" id="tribus_instant_communication-<?php echo $site['blog_id']; ?>" name="tribus_instant_communication" value="Y" <?php echo ( get_blog_option($site['blog_id'], 'tribus_instant_communication') == 'Y' ) ? "CHECKED" : ""; ?>>
+						</th>
+					</tr>
+<?php
+				}
+?>
+				</tbody>
+			</table>
+
+		</div>
+		<script type="text/javascript">
+			jQuery(function($){
+				$('table.sites input[type="text"]').blur(function(event){
+					$("#message").html("<p>Saving...</p>").removeClass().addClass("warning").show();
+					var split = $(this).attr('id').split("-");
+					var val = $(this).val();				
+					$.post("<?php echo $ajaxUrl; ?>", {
+						action: 'TribusAdminModulesInput',
+						blog_id: split[1],
+						tribus_id: val,
+						cookie: encodeURIComponent(document.cookie),
+						_ajax_nonce: $('input#TribusAdminModules').val()
+					}, function(data) {
+						if ( window.console && console.log ) console.log(data); 
+						var resp = $.parseJSON(data);
+						if ( resp.errorCode > 0 ) {
+							$("#message").removeClass().addClass("error");
+						} else {
+							$("#message").removeClass().addClass("success");
+						}
+						$("#message").html("<p>" + resp.message + "</p>").show();
+					});
+				});
+				$('table.sites input[type="checkbox"]').click(function(event){
+					$("#message").html("<p>Saving...</p>").removeClass().addClass("warning").show();
+					var split = $(this).attr('id').split("-");
+					var checked = ( $(this).attr('checked') ) ? 'Y' : 'N';
+			
+					$.post("<?php echo $ajaxUrl; ?>", {
+						action: 'TribusAdminModulesCheck',
+						property: split[0],
+						blog_id: split[1],
+						activate: checked,
+						cookie: encodeURIComponent(document.cookie),
+						_ajax_nonce: $('input#TribusAdminModules').val()
+					}, function(data) {
+						if ( window.console && console.log ) console.log(data); 
+						var resp = $.parseJSON(data);
+						if ( resp.errorCode > 0 ) {
+							$("#message").removeClass().addClass("error");
+						} else {
+							$("#message").removeClass().addClass("success");
+						}
+						$("#message").html("<p>" + resp.message + "</p>").show();
+					});
+					
+				});
+			});
+		</script>
+		<style type="text/css">
+			th.check-column, th.center {
+				text-align:center;
+			}
+			table.sites input[type="text"] {
+				width:130px;
+				padding:2px 0px;
+			}
+			table.sites {
+				border-bottom:0px;
+			}
+			.success {
+				border:1px solid #6ec260;
+				padding: 2px 0px 2px 5px;
+				margin: 5px 5px 10px 5px;
+				background: #D8F3D3;
+				-moz-border-radius:3px;
+				-webkit-border-radius:3px;
+				border-radius:3px;
+			}
+
+			.error {
+				background: #ffebe8;
+				border:1px solid #c00;
+				padding: 2px 0px 2px 5px;
+				margin: 5px 5px 10px 5px;
+				-moz-border-radius:3px;
+				-webkit-border-radius:3px;
+				border-radius:3px;
+			}
+
+			.warning {
+				background: #ffffe0;
+				border:1px solid #e6db55;
+				padding: 2px 0px 2px 5px;
+				margin: 5px 5px 10px 5px;
+				-moz-border-radius:3px;
+				-webkit-border-radius:3px;
+				border-radius:3px;
+			}
+
+			.success p, .error p, .warning p {
+				margin: 0.5em 0;
+				padding: 2px;
+				color:#000000;
+				text-shadow: 0 1px 0 #ffffff;
+
+			}
+			
+			.cut-title {
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				width:150px;
+				display:block;
+			}
+		</style>
+
+<?php
+	
+	}
+	
+	
+}
+

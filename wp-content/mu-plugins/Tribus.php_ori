@@ -1,0 +1,90 @@
+<?php
+/*
+Plugin Name: Tribus Custom Loader Class
+Plugin URI: http://www.tribus.com/
+Description: Class to load Tribus framework.
+Version: 1.0
+Author: Jason Benesch
+Author URI: http://www.jasonbenesch.com/
+*/
+
+require_once("Tribus/tribus_core.php");
+
+class Tribus extends TribusCore {
+	
+	var $modules = array(
+		'tribus_admin_modules' => array(
+			'load' 	=> true,
+			'class' => 'TribusModules',
+			'file' 	=> 'tribus_admin_modules.php'
+		),
+		'tribus_theme' => array(
+			'load' 	=> true,
+			'class' => 'TribusTheme',
+			'file' 	=> 'tribus_theme.php'
+		),
+		'tribus_api' => array(
+			'load' 	=> true,
+			'class' => 'TribusApi',
+			'file' 	=> 'tribus_api.php'
+		),
+		'tribus_widgets' => array(
+			'load' 	=> true,
+			'class' => 'TribusWidgets',
+			'file' 	=> 'tribus_widgets.php'
+		),
+		'tribus_custom_post_type' => array(
+			'load' 	=> false,
+			'class' => 'TribusCustomPostType',
+			'file' 	=> 'tribus_custom_post_type.php'
+		),
+		'tribus_power_conversion' => array(
+			'load' 	=> false,
+			'class' => 'TribusPowerConversion',
+			'file' 	=> 'tribus_conversion.php'
+		),
+		'tribus_seo' => array(
+			'load' 	=> false,
+			'class' => 'TribusSEO',
+			'file' 	=> 'tribus_seo.php'
+		),
+		'tribus_idx' => array(
+			'load' 	=> false,
+			'class' => 'TribusIDX',
+			'file' 	=> 'tribus_idx.php'
+		),
+		'tribus_market_stats' => array(
+			'load' 	=> false,
+			'class' => 'TribusMarketStats',
+			'file' 	=> 'tribus_market_stats.php'
+		),
+		'tribus_instant_communication' => array(
+			'load' 	=> false,
+			'class' => 'TribusInstantCommunication',
+			'file' 	=> 'tribus_instant_communication.php'
+		)
+	);
+
+	function __construct() {
+		global $blog_id, $wpdb;
+		
+		$table = ( $blog_id > 1 ) ? "wp_{$blog_id}_options" : "wp_options";
+		foreach ( $this->modules as $name => $module ) {
+			if ( $module['load'] ) {
+				require_once( 'Tribus/' . $module['file'] );
+				$this->{$name} = new $module['class'];
+			} else {
+				if ( $activate = $wpdb->get_var("SELECT option_value FROM {$table} WHERE option_name='{$name}'") ) {
+					if ( $activate == 'Y' ) {
+						require_once( 'Tribus/' . $module['file'] );
+						$this->{$name} = new $module['class'];
+					}
+				}	
+			}
+		}
+	}
+
+}
+
+if ( !isset($Tribus) ) $Tribus = new Tribus;
+
